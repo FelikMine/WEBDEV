@@ -1,0 +1,12 @@
+
+
+#searcher {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 80px;
+    align-items: center;
+}
+#dropdown-basic-button {
+    background-color: var(--dark-green);
+}
