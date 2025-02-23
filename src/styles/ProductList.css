@@ -1,0 +1,16 @@
+
+#products {
+    padding: 5%;
+}
+.product-image {
+    object-fit: contain;
+    height: 200px;
+    padding: 10px;
+}
+#card {
+    min-height: 500px;
+}
+/* .product-description {
+    height: 150px;
+    overflow: hidden;
+} */

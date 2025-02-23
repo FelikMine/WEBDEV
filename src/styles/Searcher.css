@@ -6,6 +6,12 @@
     justify-content: space-around;
     height: 80px;
     align-items: center;
+    border-bottom: 3px solid var(--light-orange);
+}
+#searcher input {
+    width: 300px;
+    border-radius: 5px;
+    border: 2px solid var(--dark-grey);
 }
 #dropdown-basic-button {
     background-color: var(--dark-green);
