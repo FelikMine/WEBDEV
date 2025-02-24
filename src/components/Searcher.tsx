@@ -1,11 +1,17 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import '../styles/Searcher.css';
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 
-export default function Searcher({ categories, nowCategory, onSelect}) {
+interface SearcherProps {
+    categories: Set<string>;
+    nowCategory: string;
+    onSelect: (category: string) => void;
+}
 
-    const [dropdown, setDropdown] = useState([]);
+export default function Searcher({ categories, nowCategory, onSelect} : SearcherProps) {
+
+    const [dropdown, setDropdown] = useState<React.ReactElement[]>([]);
 
     useEffect(() => {
         const items = Array.from(categories).map((category) => (
@@ -16,40 +22,6 @@ export default function Searcher({ categories, nowCategory, onSelect}) {
         setDropdown(items);
     }, [categories, onSelect]);
 
-    // const [productsData, setProductsData] = useState([]);
-    // const [categories, setCategories] = useState([]);
-    // const [nowCategory, setNowCategory] = useState("Category");
-    // const [dropdown, setDropdown] = useState([]);
-
-    // useEffect( () => {
-
-    //     fetch('https://fakestoreapi.com/products')
-    //     .then(res => res.json())
-    //     .then(data => {
-
-    //         setProductsData(data);
-
-    //         const uniqueCategories = new Set(data.map(el => el.category));
-    //         setCategories(uniqueCategories);
-    //     });
-    // }, [])
-
-
-    // useEffect( () => {
-
-    //     const items = Array.from(categories).map((category) => (
-    //         <Dropdown.Item key={category} eventKey={category} onSelect={HandleSelect}>
-    //             {category}
-    //         </Dropdown.Item>
-    //     ));
-
-    //     setDropdown(items);
-
-    // }, [categories])
-
-    // const HandleSelect = (category) => {
-    //     setNowCategory(category);
-    // }
 
     return (
         <>
