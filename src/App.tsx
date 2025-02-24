@@ -31,11 +31,11 @@ function App() {
   const HandleSelect = (category) => {
 
       setNowCategory(category);
-      console.log(nowCategory);
 
       const filteredProducts = productsData.filter(el => el.category == category);
       setFilterProductsData(filteredProducts);
 
+      // console.log(nowCategory);
   };
 
   return (
