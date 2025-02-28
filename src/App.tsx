@@ -26,8 +26,6 @@ function App() {
 
       <Button variant={variant} onClick={() => setFull(!full)}>Info</Button>
       <Button variant="secondary">Secondary</Button>
-    </>
-  )
+  </>
+)
 }
-
-export default App
