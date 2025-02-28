@@ -26,6 +26,8 @@ function App() {
 
       <Button variant={variant} onClick={() => setFull(!full)}>Info</Button>
       <Button variant="secondary">Secondary</Button>
+      <Button variant="dark">Dark</Button>
+      
   </>
 )
 }
