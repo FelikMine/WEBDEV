@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
-function App() {
+export default function App() {
 
   const [full, setFull] = useState(true);
   const variant = full ? 'info' : "outline-info";
@@ -27,7 +27,7 @@ function App() {
       <Button variant={variant} onClick={() => setFull(!full)}>Info</Button>
       <Button variant="secondary">Secondary</Button>
       <Button variant="dark">Dark</Button>
-      
+
   </>
-)
+  )
 }
