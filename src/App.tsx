@@ -5,6 +5,9 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ProductList from "./components/ProductList";
 import Searcher from './components/Searcher';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProducts } from './app/productsSlice';
+import { RootState } from './app/store';
 
 interface Product {
   id: number;
@@ -17,10 +20,15 @@ interface Product {
 
 function App() {
 
-  const [productsData, setProductsData] = useState<Product[]>([]);
+  // const [productsData, setProductsData] = useState<Product[]>([]);
+  // const [categories, setCategories] = useState<Set<string>>(new Set());
+
   const [filterProductsData, setFilterProductsData] = useState<Product[]>([]);
-  const [categories, setCategories] = useState<Set<string>>(new Set());
   const [nowCategory, setNowCategory] = useState<string>("Category");
+
+  const dispatch = useDispatch();
+    const productsData = useSelector((state: RootState) => state.products.catalog);
+    const categories = useSelector((state: RootState) => state.products.categories);
 
   useEffect(() => {
 
@@ -28,14 +36,15 @@ function App() {
           .then(res => res.json())
           .then((data: Product[])=> {
 
-              setProductsData(data);
-              setFilterProductsData(data);
+              dispatch(getProducts(data));
 
-              const uniqueCategories = new Set(data.map(el => el.category));
-              setCategories(uniqueCategories);
+              setFilterProductsData(data);
+              // setProductsData(data);
+              // const uniqueCategories = new Set(data.map(el => el.category));
+              // setCategories(uniqueCategories);
           });
 
-  }, []);
+  }, [dispatch]);
 
   const HandleSelect = (category: string) => {
 
