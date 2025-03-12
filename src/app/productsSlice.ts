@@ -11,10 +11,14 @@ interface Product {
 interface ProductsState {
     catalog : Product[],
     categories: Set<string>;
+    filterData: Product[],
+    nowCategory: string,
 }
 const initialState:ProductsState ={
     catalog: [],
     categories: new Set(),
+    filterData: [],
+    nowCategory: "Category",
 }
 
 const productsSlice = createSlice( {
@@ -24,8 +28,9 @@ const productsSlice = createSlice( {
         getProducts (state, action: PayloadAction<Product[]>) {
             console.log(state, "-состояние" , action, "-действие");
 
-            state.catalog = action.payload;
+            state.catalog = action.payload; //payload-непосредственно передаваемые данные
             state.categories = new Set(action.payload.map(el => el.category));
+            state.filterData = action.payload;
 
             // fetch('https://fakestoreapi.com/products/')
             // .then(res => res.json())
@@ -36,13 +41,22 @@ const productsSlice = createSlice( {
 
             //     const uniqueCategories = new Set(data.map(el => el.category));
             //     setCategories(uniqueCategories);
+            /*
+            const [filterProductsData, setFilterProductsData] = useState<Product[]>([]);
+              const [nowCategory, setNowCategory] = useState<string>("Category");*/
             // });
 
         },
-        // selectCategory (state, action) {},
+        selectCategory (state, action) {
+
+            state.nowCategory = action.payload;
+
+            const filteredProducts = state.filterData.filter(el => el.category == action.payload);
+            state.filterData = filteredProducts;
+        },
         // filterProducts (state, action) {},
     }
 })
 
-export const {getProducts} = productsSlice.actions;
+export const {getProducts, selectCategory} = productsSlice.actions;
 export default productsSlice.reducer;

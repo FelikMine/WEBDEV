@@ -5,7 +5,6 @@ import productSliceReducer from "./productsSlice";
 
 export const store = configureStore({
   reducer: {
-    // counter: counterSlice.reducer,
     //Редюсер products будет выполнять какую-то логику (:productSliceReducer)
     products: productSliceReducer,
   },

@@ -6,8 +6,9 @@ import Footer from "./components/Footer";
 import ProductList from "./components/ProductList";
 import Searcher from './components/Searcher';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts } from './app/productsSlice';
+import { getProducts, selectCategory } from './app/productsSlice';
 import { RootState } from './app/store';
+import { SelectCallback } from './components/Searcher';
 
 interface Product {
   id: number;
@@ -23,12 +24,13 @@ function App() {
   // const [productsData, setProductsData] = useState<Product[]>([]);
   // const [categories, setCategories] = useState<Set<string>>(new Set());
 
-  const [filterProductsData, setFilterProductsData] = useState<Product[]>([]);
-  const [nowCategory, setNowCategory] = useState<string>("Category");
+  // const [filterProductsData, setFilterProductsData] = useState<Product[]>([]);
+  // const [nowCategory, setNowCategory] = useState<string>("Category");
+
+  // const productsData = useSelector((state: RootState) => state.products.catalog);
+  // const categories = useSelector((state: RootState) => state.products.categories);
 
   const dispatch = useDispatch();
-    const productsData = useSelector((state: RootState) => state.products.catalog);
-    const categories = useSelector((state: RootState) => state.products.categories);
 
   useEffect(() => {
 
@@ -38,7 +40,7 @@ function App() {
 
               dispatch(getProducts(data));
 
-              setFilterProductsData(data);
+              // setFilterProductsData(data);
               // setProductsData(data);
               // const uniqueCategories = new Set(data.map(el => el.category));
               // setCategories(uniqueCategories);
@@ -46,12 +48,18 @@ function App() {
 
   }, [dispatch]);
 
-  const HandleSelect = (category: string) => {
+  const HandleSelect:SelectCallback = (category: string | null) => {
 
-      setNowCategory(category);
+    if(category) {
+      dispatch(selectCategory(category as string));
+      console.log('выбрана категория ', category);
+      
+    }
 
-      const filteredProducts = productsData.filter(el => el.category == category);
-      setFilterProductsData(filteredProducts);
+      // setNowCategory(category);
+
+      // const filteredProducts = productsData.filter(el => el.category == category);
+      // setFilterProductsData(filteredProducts);
 
   };
 
@@ -61,11 +69,13 @@ function App() {
 
         <Header/>
         <Searcher
-            categories={categories}
-            nowCategory={nowCategory}
+            // categories={categories}
+            // nowCategory={nowCategory}
             onSelect={HandleSelect}
           />
-        <ProductList products={filterProductsData} />
+        <ProductList
+        // products={filterProductsData}
+        />
         <Footer />
 
       </div>

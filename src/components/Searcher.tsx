@@ -1,17 +1,33 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import '../styles/Searcher.css';
-import {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
+import { useSelector } from "react-redux";
+import { RootState } from '../app/store';
+
+// type SelectCallback  = {
+//     eventKey: string | null,
+//     e: React.SyntheticEvent<unknown>,
+// }
+
+export type SelectCallback = (
+    eventKey: string | null,
+    e?: React.SyntheticEvent<unknown, Event>
+) => void;
 
 interface SearcherProps {
-    categories: Set<string>;
-    nowCategory: string;
-    onSelect: (category: string) => void;
+    // categories: Set<string>;
+    // nowCategory: string;
+    // (category: string) => void
+    onSelect: SelectCallback;
 }
 
-export default function Searcher({ categories, nowCategory, onSelect} : SearcherProps) {
+export default function Searcher({onSelect} : SearcherProps) {
 
     const [dropdown, setDropdown] = useState<React.ReactElement[]>([]);
+
+    const categories = useSelector((state: RootState) => state.products.categories);
+    const nowCategory = useSelector((state: RootState) => state.products.nowCategory);
 
     useEffect(() => {
         const items = Array.from(categories).map((category) => (
@@ -20,6 +36,8 @@ export default function Searcher({ categories, nowCategory, onSelect} : Searcher
             </Dropdown.Item>
         ));
         setDropdown(items);
+        console.log(items, categories, 'категории');
+
     }, [categories, onSelect]);
 
 

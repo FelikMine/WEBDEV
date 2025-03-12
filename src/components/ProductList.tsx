@@ -3,18 +3,16 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import "../styles/ProductList.css";
 import Row from 'react-bootstrap/Row';
+import { useSelector } from "react-redux";
+import { RootState } from '../app/store';
 
-interface Product {
-    id: number;
-    title: string;
-    description: string;
-    price: number;
-    image: string;
-}
-
-interface ProductListProps {
-    products: Product[];
-}
+// interface Product {
+//     id: number;
+//     title: string;
+//     description: string;
+//     price: number;
+//     image: string;
+// }
 
 interface TruncatedTextProps {
     text: string;
@@ -45,9 +43,11 @@ const TruncatedText: React.FC<TruncatedTextProps> = ({ text, maxLength, isBold }
     );
 };
 
-const ProductList: React.FC<ProductListProps> = ({ products }) => {
+const ProductList = () => {
 
     const [cards, setCards] = useState<React.ReactElement[]>([]);
+
+    const products = useSelector((state: RootState) => state.products.filterData);
 
     useEffect(() => {
 
