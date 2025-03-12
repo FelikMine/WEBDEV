@@ -32,20 +32,6 @@ const productsSlice = createSlice( {
             state.categories = new Set(action.payload.map(el => el.category));
             state.filterData = action.payload;
 
-            // fetch('https://fakestoreapi.com/products/')
-            // .then(res => res.json())
-            // .then((data: Product[])=> {
-
-            //     setProductsData(data);
-            //     setFilterProductsData(data);
-
-            //     const uniqueCategories = new Set(data.map(el => el.category));
-            //     setCategories(uniqueCategories);
-            /*
-            const [filterProductsData, setFilterProductsData] = useState<Product[]>([]);
-              const [nowCategory, setNowCategory] = useState<string>("Category");*/
-            // });
-
         },
         selectCategory (state, action) {
 
@@ -54,7 +40,6 @@ const productsSlice = createSlice( {
             const filteredProducts = state.filterData.filter(el => el.category == action.payload);
             state.filterData = filteredProducts;
         },
-        // filterProducts (state, action) {},
     }
 })
 

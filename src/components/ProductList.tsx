@@ -6,14 +6,6 @@ import Row from 'react-bootstrap/Row';
 import { useSelector } from "react-redux";
 import { RootState } from '../app/store';
 
-// interface Product {
-//     id: number;
-//     title: string;
-//     description: string;
-//     price: number;
-//     image: string;
-// }
-
 interface TruncatedTextProps {
     text: string;
     maxLength: number;

@@ -5,20 +5,12 @@ import React, {useState, useEffect} from 'react';
 import { useSelector } from "react-redux";
 import { RootState } from '../app/store';
 
-// type SelectCallback  = {
-//     eventKey: string | null,
-//     e: React.SyntheticEvent<unknown>,
-// }
-
 export type SelectCallback = (
     eventKey: string | null,
     e?: React.SyntheticEvent<unknown, Event>
 ) => void;
 
 interface SearcherProps {
-    // categories: Set<string>;
-    // nowCategory: string;
-    // (category: string) => void
     onSelect: SelectCallback;
 }
 

@@ -1,13 +1,12 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState , useEffect} from 'react';
+import { useEffect } from 'react';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ProductList from "./components/ProductList";
 import Searcher from './components/Searcher';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getProducts, selectCategory } from './app/productsSlice';
-import { RootState } from './app/store';
 import { SelectCallback } from './components/Searcher';
 
 interface Product {
@@ -21,15 +20,6 @@ interface Product {
 
 function App() {
 
-  // const [productsData, setProductsData] = useState<Product[]>([]);
-  // const [categories, setCategories] = useState<Set<string>>(new Set());
-
-  // const [filterProductsData, setFilterProductsData] = useState<Product[]>([]);
-  // const [nowCategory, setNowCategory] = useState<string>("Category");
-
-  // const productsData = useSelector((state: RootState) => state.products.catalog);
-  // const categories = useSelector((state: RootState) => state.products.categories);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -39,11 +29,6 @@ function App() {
           .then((data: Product[])=> {
 
               dispatch(getProducts(data));
-
-              // setFilterProductsData(data);
-              // setProductsData(data);
-              // const uniqueCategories = new Set(data.map(el => el.category));
-              // setCategories(uniqueCategories);
           });
 
   }, [dispatch]);
@@ -53,13 +38,8 @@ function App() {
     if(category) {
       dispatch(selectCategory(category as string));
       console.log('выбрана категория ', category);
-      
+
     }
-
-      // setNowCategory(category);
-
-      // const filteredProducts = productsData.filter(el => el.category == category);
-      // setFilterProductsData(filteredProducts);
 
   };
 
@@ -67,15 +47,11 @@ function App() {
     <>
       <div id='wrapper'>
 
-        <Header/>
+        <Header />
         <Searcher
-            // categories={categories}
-            // nowCategory={nowCategory}
             onSelect={HandleSelect}
           />
-        <ProductList
-        // products={filterProductsData}
-        />
+        <ProductList />
         <Footer />
 
       </div>
