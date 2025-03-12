@@ -22,13 +22,20 @@ export default function Searcher({onSelect} : SearcherProps) {
     const nowCategory = useSelector((state: RootState) => state.products.nowCategory);
 
     useEffect(() => {
-        const items = Array.from(categories).map((category) => (
+
+        const defaultCategory = (
+            <Dropdown.Item key="category" eventKey="category">
+                сategory
+            </Dropdown.Item>
+        );
+
+        const items = categories.map((category) => (
             <Dropdown.Item key={category} eventKey={category}>
                 {category}
             </Dropdown.Item>
         ));
-        setDropdown(items);
-        console.log(items, categories, 'категории');
+
+        setDropdown([defaultCategory, ...items]);
 
     }, [categories, onSelect]);
 
@@ -42,7 +49,7 @@ export default function Searcher({onSelect} : SearcherProps) {
 
             <input type="text" placeholder='search'/>
 
-            <DropdownButton id="dropdown-basic-button" title="Filter">
+            <DropdownButton id="dropdown-basic-button" title="filter">
                 <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
                 <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
                 <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>

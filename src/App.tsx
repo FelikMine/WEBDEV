@@ -37,8 +37,6 @@ function App() {
 
     if(category) {
       dispatch(selectCategory(category as string));
-      console.log('выбрана категория ', category);
-
     }
 
   };

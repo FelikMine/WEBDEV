@@ -10,15 +10,15 @@ interface Product {
 }
 interface ProductsState {
     catalog : Product[],
-    categories: Set<string>;
+    categories: string[];
     filterData: Product[],
     nowCategory: string,
 }
 const initialState:ProductsState ={
     catalog: [],
-    categories: new Set(),
+    categories: [],
     filterData: [],
-    nowCategory: "Category",
+    nowCategory: "category",
 }
 
 const productsSlice = createSlice( {
@@ -26,10 +26,11 @@ const productsSlice = createSlice( {
     initialState,
     reducers : {
         getProducts (state, action: PayloadAction<Product[]>) {
-            console.log(state, "-состояние" , action, "-действие");
+            // console.log(state, "-состояние" , action, "-действие");
 
             state.catalog = action.payload; //payload-непосредственно передаваемые данные
-            state.categories = new Set(action.payload.map(el => el.category));
+            const uniqueCategories = Array.from(new Set(action.payload.map(el => el.category)));
+            state.categories = uniqueCategories;
             state.filterData = action.payload;
 
         },
@@ -37,8 +38,11 @@ const productsSlice = createSlice( {
 
             state.nowCategory = action.payload;
 
-            const filteredProducts = state.filterData.filter(el => el.category == action.payload);
-            state.filterData = filteredProducts;
+            if (action.payload === "category") {
+                state.filterData = state.catalog;
+            } else {
+                state.filterData = state.catalog.filter(el => el.category === action.payload);
+            }
         },
     }
 })
