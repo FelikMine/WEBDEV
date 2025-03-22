@@ -11,10 +11,30 @@ export default function Login() {
 
     const getMessage = async () => {
         const response = await fetch("http://localhost:3000/message");
-
         const json = response.json();
 
+        // const response2 = await fetch(`http://localhost:3000/user?email=${email}`);
+        // const json2 = response2.json();
+        // console.log(json2);
         console.log(json);
+
+        try {
+            const response2 = await fetch(`http://localhost:3000/user?email=test@example.com`);
+
+            // Логируем статус и текст ответа
+            console.log('Status:', response2.status);
+            const text = await response2.text(); // Читаем ответ как текст
+            console.log('Response text:', text);
+
+            if (!response2.ok) {
+                throw new Error(`HTTP error! status: ${response2.status}`);
+            }
+
+            const json2 = await response2.json(); // Парсим JSON
+            console.log('User data:', json2);
+        } catch (error) {
+            console.error('Error fetching user:', error);
+        }
 
     }
 
