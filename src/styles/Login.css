@@ -1,36 +1,36 @@
-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+.login input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: var(--light-green);
     opacity: 1; /* Firefox */
 }
-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+.login input:-ms-input-placeholder { /* Internet Explorer 10-11 */
     color: var(--light-green);
 }
-input::-ms-input-placeholder { /* Microsoft Edge */
+.login input::-ms-input-placeholder { /* Microsoft Edge */
     color: var(--light-green);
 }
-form, input {
+.login form, .login input {
     border-radius: 10px;
     border-width: 1.5px;
     border-color: var(--dark-grey) !important;
     border-style:solid;
 }
 /* input */
-.btn-custom  {
+.login  .btn-custom  {
     background-color: var(--dark-green);
     color: white;
 }
-.btn-custom:hover {
+.login .btn-custom:hover {
     background-color: var(--light-green);
     color: var(--dark-grey);
 }
-a {
+.login a {
     color: var(--dark-green);
 }
-h1 {
+.login h1 {
     color: var(--dark-grey);
     font-size: 2rem;
 }
-label {
+.login label {
     color: var(--dark-green);
     font-size: 20px;
     font-weight: 500;
