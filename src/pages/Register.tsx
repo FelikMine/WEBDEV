@@ -1,6 +1,8 @@
 import Header from "../components/Header";
 import { FormEvent, useState } from "react";
 import Footer from "../components/Footer";
+import { useDispatch } from 'react-redux';
+import { setUserData } from '../app/userDataSlice';
 import "../styles/Register.css";
 import '../styles/global.css';
 
@@ -10,21 +12,24 @@ export default function Register() {
     const [password, setPassword] = useState('');
     const [userName, setUserName] = useState('');
 
+    const dispatch = useDispatch();
+
   const handleSubmit = async (e:FormEvent) => {
     e.preventDefault();
 
     const response = await fetch('http://localhost:5000/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, name, password }),
+      body: JSON.stringify({ userName, email, password }),
     });
 
     const data = await response.json();
     if (data.token) {
       localStorage.setItem('token', data.token);
-      alert('Login successful!');
+      alert('Register successful!');
+      dispatch(setUserData({ userName, email, password}))
     } else {
-      alert('Login failed');
+      alert('Register failed');
     }
   };
 

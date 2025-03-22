@@ -9,7 +9,8 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-  const handleSubmit = async (e:FormEvent) => {
+
+    const handleSubmit = async (e:FormEvent) => {
     e.preventDefault();
 
     const response = await fetch('http://localhost:5000/login', {

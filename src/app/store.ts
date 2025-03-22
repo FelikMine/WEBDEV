@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import productSliceReducer from "./productsSlice";
+import userDataSliceReducer from "./userDataSlice";
 
 export const store = configureStore({
   reducer: {
     //Редюсер products будет выполнять какую-то логику (:productSliceReducer)
     products: productSliceReducer,
+    userData: userDataSliceReducer,
   },
 })
 
