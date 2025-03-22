@@ -9,24 +9,34 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const getMessage = async () => {
+        const response = await fetch("http://localhost:3000/message");
+
+        const json = response.json();
+
+        console.log(json);
+
+    }
+
+    getMessage();
 
     const handleSubmit = async (e:FormEvent) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    const response = await fetch('http://localhost:5000/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
+        const response = await fetch('http://localhost:5000/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+        });
 
-    const data = await response.json();
-    if (data.token) {
-      localStorage.setItem('token', data.token);
-      alert('Login successful!');
-    } else {
-      alert('Login failed');
-    }
-  };
+        const data = await response.json();
+        if (data.token) {
+        localStorage.setItem('token', data.token);
+        alert('Login successful!');
+        } else {
+        alert('Login failed');
+        }
+    };
 
     return (
         <>
