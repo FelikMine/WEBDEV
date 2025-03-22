@@ -10,10 +10,12 @@ export default function Header () {
         <>
             <Navbar className="bg-color" data-bs-theme="dark">
                 <Container>
-                <Navbar.Brand href="/main">Home</Navbar.Brand>
+                <Navbar.Brand href="/profile">Profile</Navbar.Brand>
                 <Nav className="me-auto">
+                    <Nav.Link href="/main">Main</Nav.Link>
                     <Nav.Link href="/products">Products</Nav.Link>
-                    <Nav.Link href="/main">Pricing</Nav.Link>
+                    <Nav.Link href="/favorites">Favorites</Nav.Link>
+                    <Nav.Link href="/card">Card</Nav.Link>
                 </Nav>
                 </Container>
             </Navbar>

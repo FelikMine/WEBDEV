@@ -10,7 +10,7 @@ export default function Footer () {
         <>
             <Navbar className="bg-color" data-bs-theme="dark">
                 <Container style={{ height: '100px'}}>
-                <Navbar.Brand href="/main" style={{ borderRight: '1px solid white', paddingRight: '20px'}}>Home</Navbar.Brand>
+                <Navbar.Brand href="/profile" style={{ borderRight: '1px solid white', paddingRight: '20px'}}>Profile</Navbar.Brand>
                 <Nav className="me-auto">
                     <Nav.Link style={{ color: 'white', fontWeight: '600'}}> Contacts: </Nav.Link>
                     <Nav.Link href="mailto:nonscriverescript@gmail.com">Mail</Nav.Link>

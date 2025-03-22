@@ -1,11 +1,26 @@
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.tsx'
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
+import { BrowserRouter, Routes, Route } from "react-router";
 import { store } from './app/store'
+import App from './pages/App.tsx';
+import StartPage from './pages/StartPage.tsx';
+import Card from './pages/Card.tsx';
+import Profile from './pages/Profile.tsx';
+import Favorites from './pages/Favorites.tsx';
 
 createRoot(document.getElementById('root')!).render(
     <Provider store={store}>
-        <App />
+        <BrowserRouter>
+            <Routes>
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/products" element={<App />} />
+                <Route path="/favorites" element={<Favorites />} />
+                <Route path="/card" element={<Card />} />
+                <Route path="/main" element={<StartPage />} />
+                <Route path="/" element={<StartPage />} />
+            </Routes>
+        </BrowserRouter>
+        {/* <App /> */}
     </Provider>,
 )
