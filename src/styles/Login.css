@@ -1,0 +1,38 @@
+input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: var(--light-green);
+    opacity: 1; /* Firefox */
+}
+input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: var(--light-green);
+}
+input::-ms-input-placeholder { /* Microsoft Edge */
+    color: var(--light-green);
+}
+form, input {
+    border-radius: 10px;
+    border-width: 1.5px;
+    border-color: var(--dark-grey) !important;
+    border-style:solid;
+}
+/* input */
+.btn-custom  {
+    background-color: var(--dark-green);
+    color: white;
+}
+.btn-custom:hover {
+    background-color: var(--light-green);
+    color: var(--dark-grey);
+}
+a {
+    color: var(--dark-green);
+}
+h1 {
+    color: var(--dark-grey);
+    font-size: 2rem;
+}
+label {
+    color: var(--dark-green);
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: -1rem;
+}
