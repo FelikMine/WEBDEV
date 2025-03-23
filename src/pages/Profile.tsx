@@ -10,7 +10,6 @@ export default function Profile() {
 
     console.log(userData);
 
-
     return (
         <>
         <div id="wrapper">

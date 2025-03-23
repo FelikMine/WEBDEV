@@ -1,9 +1,9 @@
 import express from 'express';
 import cors from 'cors';
-import pkg from 'pg';
-const { Pool } = pkg;
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import pkg from 'pg';
+const { Pool } = pkg;
 
 const app = express();
 const port = 3000;
@@ -29,6 +29,7 @@ app.get('/message', (req, res) => {
 
 app.post('/login', async (req, res)=> {
 
+
   const {email, password} = req.body;
   //Если не найдены значения:
   if(!email || !password) {
@@ -36,6 +37,7 @@ app.post('/login', async (req, res)=> {
       error: "Don't send all values"
     })
   }
+  console.log( "Получаемые данные login " , email, password );
 
     try {
 
@@ -48,7 +50,11 @@ app.post('/login', async (req, res)=> {
 
       const findedUser = findUser.rows[0];
 
-      const isPasswordValid = await bcrypt.compare(password, findedUser.passwordHash);
+      if (!password || !findedUser.password_hash) {
+        return res.status(400).json({ error: 'Password or hash is missing' });
+      }
+
+      const isPasswordValid = await bcrypt.compare(password, findedUser.password_hash);
 
       if(!isPasswordValid) {
         return res.status(401).json ( {
@@ -66,7 +72,13 @@ app.post('/login', async (req, res)=> {
         {expiresIn: '6h'}
       )
 
-      res.json({token});
+      res.json({
+        token,
+        user: {
+          userName: findedUser.username,
+          email: findedUser.email,
+        },
+      });
 
     } catch (error) {
       console.error('Error during login:', error);
@@ -75,7 +87,9 @@ app.post('/login', async (req, res)=> {
 })
 
 app.post('/register', async (req, res) => {
+
     const {userName, email, password} = req.body;
+    console.log( "Получаемые данные ",userName, email, password );
 
     if( !userName || !email || !password) {
       return res.status(400).json({
@@ -88,7 +102,7 @@ app.post('/register', async (req, res) => {
       const saltRounds = 10; //Значение по-умолчанию
       const passwordHash = await bcrypt.hash(password, saltRounds);
 
-      const result = await pool.query('INSERT INTO users (userName, email, passwordHash) VALUES ($1, $2, $3) RETURNING *',
+      const result = await pool.query('INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3) RETURNING *',
       [userName, email, passwordHash]);
 
       res.status(201).json(result.rows[0]);
@@ -100,7 +114,6 @@ app.post('/register', async (req, res) => {
       if (error.code === '23505') {
         return res.status(409).json({ error: 'Email/Username already exists' });
       }
-
       res.status(500).json({ error: 'Internal server error' });
     }
 })

@@ -20,8 +20,8 @@ const userDataSlice = createSlice( {
             // console.log(state, "-состояние" , action, "-действие");
 
             state.userName = action.payload.userName;
-            state.password = action.payload.password;
             state.email = action.payload.email;
+            state.password = action.payload.password;
 
         },
     }

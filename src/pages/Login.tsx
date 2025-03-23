@@ -1,60 +1,41 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { FormEvent, useState } from "react";
+import { useDispatch } from 'react-redux';
+import { setUserData } from '../app/userDataSlice';
 import "../styles/Login.css";
 import '../styles/global.css';
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    const getMessage = async () => {
-        const response = await fetch("http://localhost:3000/message");
-        const json = response.json();
-
-        // const response2 = await fetch(`http://localhost:3000/user?email=${email}`);
-        // const json2 = response2.json();
-        // console.log(json2);
-        console.log(json);
-
-        try {
-            const response2 = await fetch(`http://localhost:3000/user?email=test@example.com`);
-
-            // Логируем статус и текст ответа
-            console.log('Status:', response2.status);
-            const text = await response2.text(); // Читаем ответ как текст
-            console.log('Response text:', text);
-
-            if (!response2.ok) {
-                throw new Error(`HTTP error! status: ${response2.status}`);
-            }
-
-            const json2 = await response2.json(); // Парсим JSON
-            console.log('User data:', json2);
-        } catch (error) {
-            console.error('Error fetching user:', error);
-        }
-
-    }
-
-    getMessage();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleSubmit = async (e:FormEvent) => {
         e.preventDefault();
 
-        const response = await fetch('http://localhost:5000/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        console.log( "Передаваемые данные login " , email, password );
+
+        const response = await fetch('http://localhost:3000/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
         });
 
         const data = await response.json();
+
         if (data.token) {
-        localStorage.setItem('token', data.token);
-        alert('Login successful!');
+            localStorage.setItem('token', data.token);
+            console.log(data.user);
+
+            dispatch(setUserData({...data.user, password}));
+            alert('Login successful!');
+            navigate('/profile')
         } else {
-        alert('Login failed');
+            alert('Login failed');
         }
     };
 
