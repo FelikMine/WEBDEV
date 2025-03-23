@@ -3,6 +3,7 @@ import { FormEvent, useState } from "react";
 import Footer from "../components/Footer";
 import { useDispatch } from 'react-redux';
 import { setUserData } from '../app/userDataSlice';
+import { useNavigate } from "react-router-dom";
 import "../styles/Register.css";
 import '../styles/global.css';
 
@@ -11,7 +12,7 @@ export default function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [userName, setUserName] = useState('');
-
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
   const handleSubmit = async (e:FormEvent) => {
@@ -27,6 +28,7 @@ export default function Register() {
     const data = await response.json();
     if (data.token) {
       localStorage.setItem('token', data.token);
+      navigate("/login");
       alert('Register successful!');
       dispatch(setUserData({ userName, email, password}))
     } else {
