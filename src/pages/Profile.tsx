@@ -91,13 +91,13 @@ export default function Profile() {
                             <span>sum $</span>
                         </div>
 
-                        <div>
+                        <div className="profile__text">
                             <p> Sum of x supplies: </p>
                             <span>sum $</span>
                         </div>
 
                         <div>
-                            
+
                         </div>
                     </div>
 

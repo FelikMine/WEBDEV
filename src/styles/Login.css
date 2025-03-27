@@ -8,11 +8,20 @@
 .login input::-ms-input-placeholder { /* Microsoft Edge */
     color: var(--light-green);
 }
-.login form, .login input {
+.login form, .login div,  .login input {
     border-radius: 10px;
     border-width: 1.5px;
     border-color: var(--dark-grey) !important;
     border-style:solid;
+}
+.login div {
+    border-color: var(--dark-green) !important;
+    margin: 100px 0 !important;
+}
+.login p {
+    text-align: center;
+    font-size: 20px;
+    margin: 16px 100px;
 }
 /* input */
 .login  .btn-custom  {
@@ -35,4 +44,10 @@
     font-size: 20px;
     font-weight: 500;
     margin-bottom: -1rem;
+}
+.btn a{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500;
 }
